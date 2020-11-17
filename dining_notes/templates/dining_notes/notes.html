@@ -1,0 +1,31 @@
+{% extends 'dining_notes/base.html' %}
+
+{% block content%}
+
+<h3>Hello, {{ user.username }}!</h3>
+<p>Record everything you eat and drink during the day.</p><br>
+
+<h5>Dining notes on {{ date }}:</h5>
+<div>
+    <table class="table table-sm">
+        {% for note in notes %}
+        <tr>
+            <td><a href="{% url 'edit_note' note.id %}">{{ note.meal}}:</a></td>
+            <td>{{note.description}}</td>
+        </tr>
+        {% empty %}
+        <p id="memo">Looks like you don't have any notes.</p>
+        <a href="{% url 'create_note' %}" class="badge badge-info">Create note</a>
+        {% endfor%}
+    </table>
+</div><br><hr>
+<div id="info">
+    <p>Choose a date and check your notes:</p>
+    <form class="form-inline">
+        {{ date_form.my_date_field }}
+        <button class="btn btn-success" type="submit">Check</button>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'dining_notes/base.html' %}
+
+{% block content%}
+
+
+<h3>Edit note:</h3>
+<div class="edit">
+
+<form action="{% url 'edit_note' note.id %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary" style="float:left;">Save</button>
+</form>
+<form action="{% url 'delete_note' note.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger" style="float:left;">Delete</button>
+</form>
+</div>
+{% endblock %}
