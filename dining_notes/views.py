@@ -8,16 +8,14 @@ from django.contrib.auth import login, logout, authenticate
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.dateparse import parse_date
+from django.utils.timezone import now
 
 from .forms import NoteForm, DateForm
 from .models import Note
 
-import datetime
-
 
 def home(request):
-    current = datetime.date.today().strftime('%Y-%m-%d')
-    return render(request, 'dining_notes/home.html', {'current': current})
+    return render(request, 'dining_notes/home.html')
 
 
 def signup_user(request):
@@ -70,15 +68,15 @@ def notes(request):
     date_from_url = request.GET.get('my_date_field')
 
     if date_from_url is None:
-        date = datetime.date.today()
+        date = now()
     else:
         date = parse_date(date_from_url)
 
-    notes = Note.objects.filter(user=request.user, date_added=date).order_by('meal')
+    my_notes = Note.objects.filter(user=request.user, date_added=date).order_by('meal')
     date_form = DateForm()
 
     return render(request, 'dining_notes/notes.html',
-                  {'notes': notes, 'date': date.strftime('%A, %d-%m-%Y'), 'date_form': date_form})
+                  {'notes': my_notes, 'date': date.strftime('%A, %d-%m-%Y'), 'date_form': date_form})
 
 
 @login_required
