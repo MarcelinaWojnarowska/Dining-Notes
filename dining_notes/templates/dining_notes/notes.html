@@ -6,12 +6,13 @@
 <p>Record everything you eat and drink during the day.</p><br>
 
 <h5>Dining notes on {{ date }}:</h5>
+<hr>
 <div>
     {% for note in notes %}
     <div><a href="{% url 'edit_note' note.id %}">{{ note.meal}}:</a><span>  {{note.description}}</span></div>
     {% empty %}
     <p id="memo">Looks like you don't have any notes.</p>
-    <a href="{% url 'create_note' %}" class="badge badge-info">Create note</a>
+    <a href="{% url 'create_note' %}" class="btn btn-primary btn-sm">Create note</a>
     {% endfor%}
 </div><br>
 <hr>
