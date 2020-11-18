@@ -34,11 +34,13 @@ def signup_user(request):
                 return redirect('notes')
 
             except IntegrityError:
+                error = 'That username has already been taken. Pleas choose another username.'
                 return render(request, 'dining_notes/signupuser.html', {'form': form,
-                                                                        'error': 'That username has already been taken. Pleas choose another username.'})
+                                                                        'error': error})
         else:
+            error = 'Passwords did not match! Try again.'
             return render(request, 'dining_notes/signupuser.html',
-                          {'form': form, 'error': 'Passwords did not match! Try again.'})
+                          {'form': form, 'error': error})
 
 
 def login_user(request):
