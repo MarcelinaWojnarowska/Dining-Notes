@@ -1,14 +1,14 @@
 # Dining-Notes
 
 ###### The app allows you to:
-- register an account , 
-- login and logout,
+- register an account 
+- login and logout
 - add, edit and delete a note
 - view added notes based on the selected date
 
 ###### Technologies used in this project:
 - Python, Django
-- HTML, CSS, 
+- HTML, CSS 
 - Bootstrap
 
 ###### System requirements:
