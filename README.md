@@ -32,7 +32,7 @@ Step 1:
 - on Windows: _(env) python manage.py runserver
 - on Linux, macOS: _(env) python manage.py runserver
 
-Step 2: _(env) flask run_ <br>
+Step 2:
 * Django version 3.x, using settings 'dining_note.settings'
 * Starting development server at http://127.0.0.1:8000/
 * Quit the server with CTRL-BREAK.
