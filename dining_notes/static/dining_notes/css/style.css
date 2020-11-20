@@ -1,0 +1,25 @@
+body {
+background-color: #ebf0fa;
+}
+
+#home {
+text-align: center;
+}
+
+#memo {
+text: bold;
+color: red;
+}
+
+#info {
+display: inline-block;
+}
+
+.edit {
+display: inline-block;
+}
+
+.mar-top-50 {
+margin-top:50px;
+}
+
