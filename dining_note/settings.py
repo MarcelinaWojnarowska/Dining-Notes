@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dining_notes',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -113,6 +114,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
+
 
 try:
     from .local_settings import *

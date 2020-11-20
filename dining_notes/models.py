@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 
 
-
-
 class Note(models.Model):
     MEAL_TYPE = (
         ("Breakfast", "Breakfast"),
@@ -19,5 +17,3 @@ class Note(models.Model):
     meal = models.CharField(max_length=10, choices=MEAL_TYPE)
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-

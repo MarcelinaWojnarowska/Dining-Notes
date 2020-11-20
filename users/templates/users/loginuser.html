@@ -1,6 +1,7 @@
 {% extends 'dining_notes/base.html' %}
 
 {% block content%}
+
 <div class="row justify-content-center mt-5">
     <div class="col-md-5">
         <h2>Login</h2>
@@ -27,7 +28,7 @@
         </form>
         <hr>
         <div class="text-center">
-            Need an account? <a href="{% url 'signup_user' %}">Sign Up here</a>
+            Need an account? <a href="{% url 'users:signup_user' %}">Sign Up here</a>
         </div>
     </div>
 </div>

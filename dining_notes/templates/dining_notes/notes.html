@@ -9,10 +9,11 @@
 <hr>
 <div>
     {% for note in notes %}
-    <div><a href="{% url 'edit_note' note.id %}">{{ note.meal}}:</a><span>  {{note.description}}</span></div>
+    <div><a href="{% url 'dining_notes:edit_note' note.id %}">{{ note.meal}}:</a><span>  {{note.description}}</span>
+    </div>
     {% empty %}
     <p id="memo">Looks like you don't have any notes.</p>
-    <a href="{% url 'create_note' %}" class="btn btn-primary btn-sm">Create note</a>
+    <a href="{% url 'dining_notes:create_note' %}" class="btn btn-primary btn-sm">Create note</a>
     {% endfor%}
 </div><br>
 <hr>
@@ -23,6 +24,5 @@
         <button class="btn btn-success" type="submit">Check</button>
     </form>
 </div>
-
 
 {% endblock %}

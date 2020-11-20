@@ -1,10 +1,6 @@
 from urllib.parse import urlencode
 
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
-from django.db import IntegrityError
-from django.contrib.auth import login, logout, authenticate
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.dateparse import parse_date
@@ -16,51 +12,6 @@ from .models import Note
 
 def home(request):
     return render(request, 'dining_notes/home.html')
-
-
-def signup_user(request):
-    form = UserCreationForm()
-
-    if request.method == 'GET':
-        return render(request, 'dining_notes/signupuser.html', {'form': form})
-    else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
-                user.save()
-                login(request, user)
-                return redirect('notes')
-
-            except IntegrityError:
-                error = 'That username has already been taken. Pleas choose another username.'
-                return render(request, 'dining_notes/signupuser.html', {'form': form,
-                                                                        'error': error})
-        else:
-            error = 'Passwords did not match! Try again.'
-            return render(request, 'dining_notes/signupuser.html',
-                          {'form': form, 'error': error})
-
-
-def login_user(request):
-    form = AuthenticationForm()
-
-    if request.method == 'GET':
-        return render(request, 'dining_notes/loginuser.html', {'form': form})
-    else:
-        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
-        if user is None:
-            return render(request, 'dining_notes/loginuser.html',
-                          {'form': form, 'error': 'Username or password is incorrect'})
-        else:
-            login(request, user)
-            return redirect('notes')
-
-
-@login_required
-def logout_user(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('home')
 
 
 @login_required
@@ -90,7 +41,7 @@ def create_note(request):
         new_note.user = request.user
         new_note.save()
 
-        base_url = reverse('notes')
+        base_url = reverse('dining_notes:notes')
         query_string = urlencode({'my_date_field': new_note.date_added})
         url = '{}?{}'.format(base_url, query_string)
         return redirect(url)
@@ -106,7 +57,7 @@ def edit_note(request, note_id):
         form = NoteForm(instance=note, data=request.POST)
         form.save()
 
-        base_url = reverse('notes')
+        base_url = reverse('dining_notes:notes')
         query_string = urlencode({'my_date_field': note.date_added})
         url = '{}?{}'.format(base_url, query_string)
         return redirect(url)
@@ -118,7 +69,7 @@ def delete_note(request, note_id):
     if request.method == 'POST':
         note.delete()
 
-        base_url = reverse('notes')
+        base_url = reverse('dining_notes:notes')
         query_string = urlencode({'my_date_field': note.date_added})
         url = '{}?{}'.format(base_url, query_string)
         return redirect(url)
